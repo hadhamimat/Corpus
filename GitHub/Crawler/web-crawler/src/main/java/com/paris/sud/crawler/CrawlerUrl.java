@@ -103,29 +103,6 @@ public class CrawlerUrl {
         return(linkList);
     }
 
-    public Queue<CrawlerUrl> readURL(){
-        BufferedReader reader = null;
-        // on se prend la liste des URLs a parcourir
-        Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>();
-        try {
-            File file = new File("/Users/Hadhami/aic/Recherche et extraction d'info/Projet/URLs");
-            reader = new BufferedReader(new FileReader(file));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                urlQueue.add(new CrawlerUrl(line));
-                reader.close();
-                break;
-             }
-            return urlQueue;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     public void setRawContent(String htmlText) {
         String baseURL  = getURL() . toExternalForm();
@@ -141,6 +118,29 @@ public class CrawlerUrl {
                 System.out.println("JSOUP Found: " + thisLink);
                 linkList . add(thisLink);
             }
+        }
+    }
+
+    public Queue<CrawlerUrl> readURL(){
+        BufferedReader reader = null;
+        // on se prend la liste des URLs a parcourir
+        Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>();
+        try {
+            File file = new File("/Users/Hadhami/aic/Recherche et extraction d'info/Projet/URLs");
+            reader = new BufferedReader(new FileReader(file));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                urlQueue.add(new CrawlerUrl(line));
+                reader.close();
+                break;
+            }
+            return urlQueue;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
